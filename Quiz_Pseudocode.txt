@@ -1,0 +1,101 @@
+INPUT user input a name and select batch
+STORE input "name" and "batch"
+
+OUTPUT Hello! Welcome to the Hacktiv8 Academic Quiz. Keep calm and answer the questions.
+
+INIT "student" object = FUNCTION;
+  property "phase" = "";
+
+  methods "level" = FUNCTION(phase)
+    IF phase.toLowerCase() = "satu"
+      OUTPUT Selamat ya jawaban kamu BENAR SEMUA! Nilaimu SEMPURNA!
+    ELSE IF phase.toLowerCase() = "nol"
+      OUTPUT Jawaban kamu masih ada yang SALAH! Nilaimu BELUM SEMPURNA!
+    ELSE IF phase.toLowerCase() = "remedial"
+      OUTPUT Jawaban kamu masih ada yang RAGU-RAGU, jadi perlu remedial dulu!
+    ELSE
+      OUTPUT Kamu masih asal-asalan mengerjakan Quiz! Silakan diulangi!
+    ENDIF
+
+INIT "newStudent" object as new "student" object
+
+INIT "benar", "salah", "ragu" variables
+
+IF benar = 5 THEN
+  "phase" property of "student" object = "Satu"
+ELSE IF salah >= 1 & ragu = 0 THEN
+  "phase" property of "student" object = "Nol"
+ELSE IF ragu >= 1 & salah = 0 THEN
+  "phase" property of "student" object = "Remedial"
+END IF
+
+FUNCTION answer()
+ INPUT user input an answer
+ STORE input variable
+ IF input = BENAR THEN
+   satu++
+ ELSE IF input = SALAH THEN
+   nol++
+ ELSE
+   remedial++
+ END IF
+END FUNCTION
+
+FUNCTION quiz()
+  OUTPUT Quiz ini berisi pertanyaan tentang materi di Phase 0.
+         Selamat mengerjakan! Das beste!
+         Hint: Bacalah setiap pernyataan pelan-pelan saja. Hati-hati ada jebakan Batman! ^_^
+         Cara menjawab:
+  INIT "ask" array = ["Klik tombol BENAR jika menurutmu pernyataan SANGAT TEPAT",
+                      "Klik tombol SALAH jika menurutmu pernyataan BELUM TEPAT.",
+                      "Klik tombol TIDAK YAKIN jika kamu masih RAGU-RAGU."]
+  FOR 0 <= i < ask1.length
+    INIT j = i+1
+    OUTPUT j + ". " + ask[i]
+  END FOR
+END FUNCTION
+
+FUNCTION question1()
+  OUTPUT  Apa pendapatmu tentang pernyataan di bawah ini:
+          HTML5 support penggunaan tag <header> untuk menggantikan <div>
+
+FUNCTION question2()
+  OUTPUT  Apa pendapatmu tentang pernyataan di bawah ini:
+          Bentuk umum selektor (CSS) adalah seperti ini: selector { property: value; /* properti lainnya */ }
+
+FUNCTION question3()
+  OUTPUT  Apa pendapatmu tentang pernyataan di bawah ini:
+          Perbedaan struktur perulangan WHILE dengan DO-WHILE terletak pada posisi pengecekan kondisi.
+          Pada WHILE kondisi dicek saat awal perulangan, sedangkan DO-WHILE kondisi perulangan dicek terakhir.
+
+FUNCTION question4()
+  OUTPUT  Apa pendapatmu tentang pernyataan di bawah ini:
+          Pada output akan tampil undefined, jika mengetikkan kode seperti ini:
+          function tampilkanAngka(angka) { return angka }
+          console.log(tampilkanAngka());
+
+FUNCTION question5()
+  OUTPUT  Apa pendapatmu tentang pernyataan di bawah ini:
+          Split pada fungsi array untuk memecah string dan mengembalikan nilai berupa array sesuai dengan pemisah tertentu yang didefinisikan.
+
+RUN question1()
+RUN answer()
+RUN question2()
+RUN answer()
+RUN question3()
+RUN answer()
+RUN question4()
+RUN answer()
+RUN question5()
+RUN answer()
+
+OUTPUT "Terima kasih atas jawabanmu dalam quiz ini."
+OUTPUT "Berdasarkan hasil quiz, inilah prediksi kelulusanmu.
+OUTPUT "Nama:" + "Batch:" = "name" + "selectBatch" property of user input
+OUTPUT "Kamu akan belajar di phase: " + "phase" property of "student" object + student.level(student.phase))
+
+FUNCTION spoiler()
+  OUTPUT  Adapun kompetensi yang akan diujikan adalah:
+          "Tipe data angka, string, dan boolean", "Array", "Kondisional", "Looping", "Built-in Function", 
+          "Rekursif (Sederhana)", "Sintaks ES6 (let, const, dan class)"
+          :: Semoga sukses semuanya! Ganbatte! Das Beste! All the best! ::
